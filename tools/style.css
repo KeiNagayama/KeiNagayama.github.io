@@ -1,0 +1,69 @@
+html {
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, Meiryo, Arial, sans-serif;
+    background-color: #888;
+}
+#clock {
+    color: #444;
+    font-size: 32px;
+    padding-bottom: 12px;
+}
+#main_sup {
+    position: sticky;
+    /* top: 12px; */
+    padding-top: 10%;
+	text-align: center;
+    margin: auto;
+}
+#main {
+    position: sticky;
+    /* top: 12px; */
+    background-color: #fff;
+    width: 500px;
+    padding: 12px;
+	text-align: center;
+    margin: auto;
+}
+#display {
+    font-size: 42px;
+    padding-bottom: 10px;
+}
+button {
+    width: 48%;
+    height: 50px;
+    max-width: 120px;
+    font-size: 26px;
+    border-radius: 8px;
+    border: 1px rgba(130, 130, 130, 0.300) solid;
+    background-color: #fff;
+    -webkit-appearance: none;
+    /* -webkit-user-select: none; */
+    cursor: pointer;
+}
+#start {
+    background-color: greenyellow;
+    /* background-color: #f30; */
+}
+#clear {
+    background-color: cyan;
+    /* background-color: yellow; */
+}
+#lap {
+    color: #444;
+    font-size: 28px;
+    margin-top: 20px;
+	text-align: center;
+}
+#ref1 {
+    position: absolute;
+    right: 2%;
+    bottom: 4%;
+}
+#ref2 {
+    position: absolute;
+    right: 2%;
+    bottom: 2%;
+}
