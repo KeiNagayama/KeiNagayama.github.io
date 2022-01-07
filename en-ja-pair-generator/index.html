@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+
+	<style type="text/css">
+		textarea { font-size: 16pt; }
+		input    { font-size: 12pt; }
+		a        { font-size: 16pt; }
+	</style>
+
+	<title>Pair Maker</title>
+</head>
+
+<body>
+	<div align="center">
+
+		<!-- input area -->
+		<h2>PAIR MAKER</h2>
+		<table>
+			<tr>
+				<td>
+					<h3 align="center">ENGLISH</h3>
+				</td>
+				<td>
+					<h3 align="center">JAPANESE</h3>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea id="en_input" cols="30" rows="12"></textarea>
+				</td>
+				<td>
+					<textarea id="ja_input" cols="30" rows="12"></textarea>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<input type="button" onclick="pair_en_ja_words()" value="make paired">
+		<input type="button" onclick="all_in_one()"       value="all in one">
+		<br><br>
+
+		<!-- output area -->
+		<h3>ENGLISH JAPANESE</h3>
+		<textarea id="paired_output" cols="60" rows="12"></textarea>
+		<br>
+		<input type="button" onclick="copy_to_clipboard()" value="copy to clipboard">
+		<a id="notelink" href="https://trello.com/c/xaaOfvt1/16-english" target="_blank">open note</a>
+		<br>
+
+	</div>
+
+
+	<script language="javascript" type+="text/javascript">
+
+		function pair_en_ja_words() {
+			// input process
+			const en_textbox = document.getElementById("en_input");
+			const ja_textbox = document.getElementById("ja_input");
+			const en_words   = en_textbox.value.split("\n");
+			const ja_words   = ja_textbox.value.split("\n");
+			const MAX_PAIRS  = Math.min(en_words.length, ja_words.length);
+			if (MAX_PAIRS == 0) return;
+
+			// output process
+			var paired_output = en_words[0] + " " + ja_words[0];
+			for (var i = 1; i < MAX_PAIRS; i++) { 
+				paired_output += "\n" + en_words[i] + " " + ja_words[i]; 
+			} 
+			const output_textbox = document.getElementById("paired_output"); 
+			output_textbox.innerHTML = paired_output;
+		}
+
+		function copy_to_clipboard() {
+			const copyTarget = document.getElementById("paired_output");
+			copyTarget.select(); document.execCommand("Copy");
+		}
+
+		function all_in_one() {
+			pair_en_ja_words();
+			copy_to_clipboard();
+			const url = document.getElementById("notelink").href;
+			window.open(url, "_blank").focus();
+		}
+
+	</script>
+</body>
+
+</html>
