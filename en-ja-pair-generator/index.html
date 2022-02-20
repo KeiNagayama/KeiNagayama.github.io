@@ -37,13 +37,13 @@
 			</tr>
 		</table>
 		<br>
-		<input type="button" onclick="pair_en_ja_words()" value="make paired">
-		<input type="button" onclick="all_in_one()"       value="all in one">
+		<input type="button" onclick="make_word_pairs()" value="preview (below)">
+		<input type="button" onclick="jump_to_note()"       value="jump to note">
 		<br><br>
 
 		<!-- output area -->
 		<h3>ENGLISH JAPANESE</h3>
-		<textarea id="paired_output" cols="60" rows="12"></textarea>
+		<textarea id="word_pairs" cols="60" rows="12"></textarea>
 		<br>
 		<input type="button" onclick="copy_to_clipboard()" value="copy to clipboard">
 		<a id="notelink" href="https://trello.com/c/xaaOfvt1/16-english" target="_blank">open note</a>
@@ -54,31 +54,38 @@
 
 	<script language="javascript" type+="text/javascript">
 
-		function pair_en_ja_words() {
-			// input process
+		function make_word_pairs() {
+			/* 
+			 * purpose: to make pair of an english word and its japanese translation
+			 * example:
+			 * * input : [apple, banana, cherry],[りんご, バナナ, さくらんぼ] (replace , by \n)
+			 * * output: [apple りんご, banana バナナ, cherry さくらんぼ]     (replace , by \n)
+			 */
+			
+			// input
 			const en_textbox = document.getElementById("en_input");
 			const ja_textbox = document.getElementById("ja_input");
 			const en_words   = en_textbox.value.split("\n");
 			const ja_words   = ja_textbox.value.split("\n");
-			const MAX_PAIRS  = Math.min(en_words.length, ja_words.length);
-			if (MAX_PAIRS == 0) return;
+			const PAIR_COUNTS  = Math.min(en_words.length, ja_words.length);
+			if (PAIR_COUNTS == 0) return;
 
-			// output process
-			var paired_output = en_words[0] + " " + ja_words[0];
-			for (var i = 1; i < MAX_PAIRS; i++) { 
-				paired_output += "\n" + en_words[i] + " " + ja_words[i]; 
+			// output
+			var word_pairs = en_words[0] + " " + ja_words[0];
+			for (var i = 1; i < PAIR_COUNTS; i++) { 
+				word_pairs += "\n" + en_words[i] + " " + ja_words[i]; 
 			} 
-			const output_textbox = document.getElementById("paired_output"); 
-			output_textbox.innerHTML = paired_output;
+			const output_textbox = document.getElementById("word_pairs"); 
+			output_textbox.innerHTML = word_pairs;
 		}
 
 		function copy_to_clipboard() {
-			const copyTarget = document.getElementById("paired_output");
-			copyTarget.select(); document.execCommand("Copy");
+			const text = document.getElementById("word_pairs");
+			text.select(); document.execCommand("Copy");
 		}
 
-		function all_in_one() {
-			pair_en_ja_words();
+		function jump_to_note() {
+			make_word_pairs();
 			copy_to_clipboard();
 			const url = document.getElementById("notelink").href;
 			window.open(url, "_blank").focus();
