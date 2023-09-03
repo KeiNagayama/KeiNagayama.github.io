@@ -38,7 +38,7 @@
 		</table>
 		<br>
 		<input type="button" onclick="make_word_pairs()" value="preview (below)">
-		<input type="button" onclick="jump_to_note()"       value="jump to note">
+		<input type="button" onclick="jump_to_note()"    value="jump to note">
 		<br><br>
 
 		<!-- output area -->
@@ -71,12 +71,16 @@
 			if (PAIR_COUNTS == 0) return;
 
 			// output
-			var word_pairs = en_words[0] + " " + ja_words[0];
+			const delim = ",";
+			var word_pairs = en_words[0] + delim + ja_words[0];
 			for (var i = 1; i < PAIR_COUNTS; i++) { 
-				word_pairs += "\n" + en_words[i] + " " + ja_words[i]; 
+				word_pairs += "\n" + en_words[i] + delim + ja_words[i]; 
 			} 
-			const output_textbox = document.getElementById("word_pairs"); 
+			const output_textbox = document.getElementById("word_pairs");
 			output_textbox.innerHTML = word_pairs;
+
+			// copy pairs
+			output_textbox.select(); document.execCommand("Copy");
 		}
 
 		function copy_to_clipboard() {
